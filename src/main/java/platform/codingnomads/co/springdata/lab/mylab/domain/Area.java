@@ -1,18 +1,17 @@
-package platform.codingnomads.co.springdata.lab.domain;
+package platform.codingnomads.co.springdata.lab.mylab.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Data
 @Table(name = "areas")
+@ToString(exclude = "flights")
 @Builder
 public class Area implements Serializable {
 
@@ -21,6 +20,11 @@ public class Area implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     @Column
     private String code;
+
+    @ManyToMany(mappedBy = "airports")
+    private List<Flight> flights;
+
 }

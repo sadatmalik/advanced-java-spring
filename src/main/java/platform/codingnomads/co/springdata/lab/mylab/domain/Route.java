@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table
+@Table(name = "areas")
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Builder

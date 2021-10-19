@@ -1,9 +1,11 @@
 package platform.codingnomads.co.springdata.lab.mylab;
 
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+
 import platform.codingnomads.co.springdata.lab.mylab.domain.Area;
 import platform.codingnomads.co.springdata.lab.mylab.domain.Flight;
 import platform.codingnomads.co.springdata.lab.mylab.domain.Route;
@@ -29,7 +31,7 @@ public class SpringDataLab implements CommandLineRunner {
     @Override
     public void run(String... args) throws Exception {
 
-        if (areaRepo.findAll().size() == 0) {
+        if (areaRepo.findAll().isEmpty()) {
             final List<Area> areas = areaRepo.saveAll(
                     Arrays.asList(
                             Area.builder().code("G").build(),
@@ -40,7 +42,7 @@ public class SpringDataLab implements CommandLineRunner {
             );
         }
 
-        if (routeRepo.findAll().size() == 0) {
+        if (routeRepo.findAll().isEmpty()) {
             Route route1 = Route.builder()
                     .origin(areaRepo.findByCode("Y"))
                     .destination(areaRepo.findByCode("Z"))
@@ -49,7 +51,7 @@ public class SpringDataLab implements CommandLineRunner {
             routeRepo.save(route1);
         }
 
-        if (flightRepo.findAll().size() == 0) {
+        if (flightRepo.findAll().isEmpty()) {
             Flight flight = Flight.builder()
                     .airports(
                             Arrays.asList(

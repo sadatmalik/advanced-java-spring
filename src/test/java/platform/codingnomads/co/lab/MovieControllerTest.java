@@ -7,6 +7,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import platform.codingnomads.co.springtest.lab.SpringTestLab;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 @SpringBootTest(classes = SpringTestLab.class)
 @AutoConfigureMockMvc
 public class MovieControllerTest {
@@ -15,8 +19,10 @@ public class MovieControllerTest {
     private MockMvc mockMvc;
 
     @Test
-    public void testGetAllMoviesSuccess() {
-
+    public void testGetAllMoviesSuccess() throws Exception {
+        mockMvc.perform(get("/all"))
+                .andDo(print())
+                .andExpect(status().isOk());
     }
 
     @Test

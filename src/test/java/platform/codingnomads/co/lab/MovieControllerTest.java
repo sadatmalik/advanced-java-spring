@@ -6,6 +6,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import platform.codingnomads.co.springtest.lab.SpringTestLab;
+import platform.codingnomads.co.springtest.lab.repository.MovieRepository;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -18,6 +19,9 @@ public class MovieControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
+    @Autowired
+    private MovieRepository movieRepo;
+
     @Test
     public void testGetAllMoviesSuccess() throws Exception {
         mockMvc.perform(get("/all"))
@@ -26,8 +30,13 @@ public class MovieControllerTest {
     }
 
     @Test
-    public void testGetAllMoviesFailure() {
+    public void testGetAllMoviesFailure() throws Exception {
+        movieRepo.deleteAll();
 
+        // Check via Postman - does it return a 404 or just an empty json msg body?
+        mockMvc.perform(get("/all"))
+                .andDo(print())
+                .andExpect(status().isNotFound());
     }
 
     @Test

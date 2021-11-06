@@ -19,4 +19,9 @@ public class MovieServiceImpl implements MovieService {
     public List<Movie> getAllMovies() {
         return movieRepository.findAll();
     }
+
+    @Override
+    public List<Movie> getMoviesByMinimumRating(Double rating) {
+        return movieRepository.getMoviesByRatingGreaterThanEqual(rating);
+    }
 }

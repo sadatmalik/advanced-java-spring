@@ -21,7 +21,11 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public List<Movie> getMoviesByMinimumRating(Double rating) {
+    public List<Movie> getMoviesByMinimumRating(Double rating) throws IllegalArgumentException{
+        if (rating < 0 || rating > 10) {
+            throw new IllegalArgumentException("Rating must specify a value between 0 and 10");
+        }
+
         return movieRepository.getMoviesByRatingGreaterThanEqual(rating);
     }
 }

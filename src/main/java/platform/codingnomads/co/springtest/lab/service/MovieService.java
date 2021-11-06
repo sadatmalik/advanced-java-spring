@@ -7,5 +7,5 @@ import java.util.List;
 public interface MovieService {
     List<Movie> getAllMovies();
 
-    List<Movie> getMoviesByMinimumRating(Double rating);
+    List<Movie> getMoviesByMinimumRating(Double rating) throws IllegalArgumentException;
 }

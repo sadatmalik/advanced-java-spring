@@ -16,6 +16,7 @@ import platform.codingnomads.co.springtest.lab.entity.Movie;
 import platform.codingnomads.co.springtest.lab.repository.MovieRepository;
 
 import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.containsString;
 import static org.hamcrest.Matchers.hasSize;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
@@ -69,11 +70,56 @@ public class MovieControllerTest {
         assertThat(movies[1].getRating()).isEqualTo(8.0);
     }
 
+    @Test
+    @Order(3)
+    public void testGetMoviesByMinimumRatingSuccess() throws Exception {
+
+        mockMvc.perform(get("/rating/8.0"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(handler().handlerType(MovieController.class))
+                .andExpect(handler().method(MovieController.class.getMethod("getMoviesByMinimumRating", Double.class)))
+
+                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$[0].name").value("The Shawshank Redemption"))
+                .andExpect(jsonPath("$[0].rating").value(9.3))
+                .andExpect(jsonPath("$[1].name").value("The Pursuit of Happyness"))
+                .andExpect(jsonPath("$[1].rating").value(8.0));
+
+        mockMvc.perform(get("/rating/8.5"))
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(handler().handlerType(MovieController.class))
+                .andExpect(handler().method(MovieController.class.getMethod("getMoviesByMinimumRating", Double.class)))
+
+                .andExpect(jsonPath("$", hasSize(1)))
+                .andExpect(jsonPath("$[0].name").value("The Shawshank Redemption"))
+                .andExpect(jsonPath("$[0].rating").value(9.3));
+
+    }
+
+    @Test
+    @Order(4)
+    public void testGetMoviesByMinimumRatingFailure() throws Exception {
+        mockMvc.perform(get("/rating/stringvalue"))
+                .andDo(print())
+                .andExpect(status().isBadRequest())
+                //todo - confirm why there's no content type header?
+                //.andExpect(header().string("Content-Type", "application/json"))
+                .andExpect(handler().handlerType(MovieController.class))
+                .andExpect(handler().method(MovieController.class.getMethod("getMoviesByMinimumRating", Double.class)));
+
+                //todo - i see this in postman but seems not to be returned here?
+                //.andExpect(content().string(containsString("Failed to convert value")));
+    }
+
     @Autowired
     private MovieRepository movieRepository;
 
     @Test
-    @Order(3)
+    @Order(5)
     public void testGetAllMoviesFailure() throws Exception {
 
         movieRepository.deleteAll();

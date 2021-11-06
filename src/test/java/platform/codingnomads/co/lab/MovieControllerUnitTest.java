@@ -29,12 +29,8 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-// TODO: 05/11/2021 - not sure why these annotations fail - complains about not finidng MovieRepo, but thought that was the point of unit testing - to only mock the needed service and not require a repo?
-//@WebMvcTest(MovieController.class)
-//@ContextConfiguration(classes = SpringTestLab.class)
-
-@SpringBootTest(classes = SpringTestLab.class)
-@AutoConfigureMockMvc
+@WebMvcTest(MovieController.class)
+@ContextConfiguration(classes = SpringTestLab.class)
 public class MovieControllerUnitTest {
 
     @Autowired
@@ -42,6 +38,9 @@ public class MovieControllerUnitTest {
 
     @MockBean
     private MovieService mockMovieService;
+
+    @MockBean
+    private MovieRepository movieRepository;
 
     @Test
     public void testGetAllMoviesSuccessMockService() throws Exception {

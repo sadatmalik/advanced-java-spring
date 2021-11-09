@@ -1,6 +1,7 @@
 package platform.codingnomads.co.springtest.lab;
 
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -8,15 +9,17 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import platform.codingnomads.co.springtest.lab.entity.Movie;
 import platform.codingnomads.co.springtest.lab.repository.MovieRepository;
 
-import javax.annotation.Nonnull;
 import java.util.Arrays;
 
 @SpringBootApplication
-@RequiredArgsConstructor
 public class SpringTestLab implements CommandLineRunner {
 
+    private final MovieRepository movieRepository;
+
     @Autowired
-    MovieRepository movieRepository;
+    public SpringTestLab(MovieRepository movieRepository) {
+        this.movieRepository = movieRepository;
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(SpringTestLab.class);

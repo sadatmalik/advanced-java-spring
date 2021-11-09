@@ -9,11 +9,14 @@ import platform.codingnomads.co.springtest.lab.repository.MovieRepository;
 import java.util.List;
 
 @Service
-@RequiredArgsConstructor
 public class MovieServiceImpl implements MovieService {
 
+    private final MovieRepository movieRepository;
+
     @Autowired
-    private MovieRepository movieRepository;
+    public MovieServiceImpl(MovieRepository movieRepository) {
+        this.movieRepository = movieRepository;
+    }
 
     @Override
     public List<Movie> getAllMovies() {

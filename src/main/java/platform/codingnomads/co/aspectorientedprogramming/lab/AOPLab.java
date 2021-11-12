@@ -1,6 +1,8 @@
 package platform.codingnomads.co.aspectorientedprogramming.lab;
 
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -10,6 +12,8 @@ import platform.codingnomads.co.aspectorientedprogramming.lab.service.GreetingSe
 @RequiredArgsConstructor
 public class AOPLab implements CommandLineRunner {
 
+    private static final Logger LOGGER = LoggerFactory.getLogger(AOPLab.class);
+
     public final GreetingService greetingService;
 
     public static void main(String[] args) {
@@ -18,6 +22,7 @@ public class AOPLab implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        greetingService.greeting();
+        LOGGER.info(greetingService.greeting());
+        LOGGER.info(greetingService.encouragement());
     }
 }

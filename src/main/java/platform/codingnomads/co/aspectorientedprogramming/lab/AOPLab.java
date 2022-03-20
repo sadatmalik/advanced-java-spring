@@ -22,7 +22,7 @@ public class AOPLab implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        LOGGER.info(greetingService.greeting());
+        LOGGER.info(greetingService.greeting()); //not sure why this prints null?
         LOGGER.info(greetingService.encouragement());
     }
 }

@@ -1,3 +1,5 @@
+*.DS_Store
+.DS_Store
 HELP.md
 .gradle
 build/
@@ -13,9 +15,6 @@ build/
 .settings
 .springBeans
 .sts4-cache
-
-### MacOS ###
-*.DS_Store
 
 ### IntelliJ IDEA ###
 .idea

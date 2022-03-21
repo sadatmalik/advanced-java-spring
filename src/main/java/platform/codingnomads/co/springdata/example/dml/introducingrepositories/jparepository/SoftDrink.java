@@ -1,17 +1,17 @@
 package platform.codingnomads.co.springdata.example.dml.introducingrepositories.jparepository;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.RequiredArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
+
 @Entity
-@Data
-@RequiredArgsConstructor
-@AllArgsConstructor
+@Getter
+@Setter
 @Builder
+@AllArgsConstructor
+@NoArgsConstructor
+@ToString
 public class SoftDrink {
 
     @Id

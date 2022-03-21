@@ -1,22 +1,21 @@
 package platform.codingnomads.co.springdata.example.dml.derivedquerymethods.plantexample;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "soil_types")
-@Data
-@AllArgsConstructor
+@Getter
+@Setter
 @NoArgsConstructor
+@AllArgsConstructor
 @Builder
+@ToString
 public class SoilType {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue
     private Long id;
 
     @Column(nullable = false, unique = true)
@@ -27,5 +26,4 @@ public class SoilType {
 
     @Column(nullable = false)
     private boolean dry;
-
 }

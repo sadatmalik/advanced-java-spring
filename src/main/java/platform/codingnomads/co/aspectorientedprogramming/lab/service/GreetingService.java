@@ -7,7 +7,7 @@ import platform.codingnomads.co.aspectorientedprogramming.lab.aspect.Printable;
 public class GreetingService {
 
     public String greeting() {
-        return "Hello Code Warrior";
+        return "Hello Spring Developer!";
     }
 
     @Printable

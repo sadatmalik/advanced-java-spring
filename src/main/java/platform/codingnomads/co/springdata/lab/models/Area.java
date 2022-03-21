@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 @Table(name = "areas")
 @Builder
-@ToString
+@ToString(exclude = "flights")
 public class Area implements Serializable {
 
     private static final long serialVersionUID = 153236560504273881L;

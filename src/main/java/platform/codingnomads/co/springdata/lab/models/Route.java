@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table
+@Table(name = "route")
 @AllArgsConstructor
 @RequiredArgsConstructor
 @Getter

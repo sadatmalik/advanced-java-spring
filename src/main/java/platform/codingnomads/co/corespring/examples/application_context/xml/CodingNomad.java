@@ -12,17 +12,21 @@ public class CodingNomad {
     private final JDK jdk;
     private final IDE ide;
     private final Framework framework;
+    private final Database database;
 
     public String createAwesomeSoftware() {
         return MessageFormat
                 .format("This coding nomad is creating awesome software using, " +
-                                "IDE:({0}:{1}), JDK: ({2}:{3}), Framework:({4}:{5})",
+                                "IDE:({0}:{1}), JDK: ({2}:{3}), Framework:({4}:{5}), " +
+                                "Database:({6}:{7})",
                         ide.getName(),
                         ide.getVersion(),
                         jdk.getName(),
                         jdk.getVersion(),
                         framework.getName(),
-                        framework.getVersion()
+                        framework.getVersion(),
+                        database.getName(),
+                        database.getVersion()
                 );
     }
 }

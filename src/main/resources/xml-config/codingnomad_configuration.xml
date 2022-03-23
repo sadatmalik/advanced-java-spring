@@ -18,5 +18,9 @@
         <property name="name" value="OpenJDK"/>
         <property name="version" value="11"/>
     </bean>
+    <bean id="database" class="platform.codingnomads.co.corespring.examples.application_context.xml.Database">
+        <property name="name" value="MySQL"/>
+        <property name="version" value="8.0.26"/>
+    </bean>
 
 </beans>

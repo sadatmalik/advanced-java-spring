@@ -11,4 +11,12 @@ public class SingletonDemoConfig {
     public SpringBean springBean() {
         return new SpringBean();
     }
+
+    // spring bean scope is singleton by default - omitting the singleton
+    // scope still results in a singleton bean being managed
+    @Bean
+    public AnotherSpringBean anotherSpringBean() {
+        return new AnotherSpringBean();
+    }
+
 }

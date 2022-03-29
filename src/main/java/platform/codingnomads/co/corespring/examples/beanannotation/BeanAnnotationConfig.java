@@ -9,4 +9,9 @@ public class BeanAnnotationConfig {
     public SampleBean sampleBean() {
         return new SampleBean();
     }
+    @Bean(initMethod = "init", destroyMethod = "cleanup", name = "_another_friendly_bean")
+    public SampleBean anotherSampleBean() {
+        return new SampleBean();
+    }
+
 }

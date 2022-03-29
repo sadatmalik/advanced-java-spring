@@ -12,4 +12,8 @@ public class SampleBean {
     public void cleanup() {
         System.out.println("time to cleanup() and head home..");
     }
+
+    public void doStuff() {
+        System.out.println("doStuff() - bean is doing its thing");
+    }
 }

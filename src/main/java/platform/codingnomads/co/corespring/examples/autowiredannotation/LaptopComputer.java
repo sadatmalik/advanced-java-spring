@@ -5,14 +5,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
+/**
+ * @author sm@creativefusion.net
+ */
 @Component
 @ToString
-public class DesktopComputer {
+public class LaptopComputer {
+
     @Autowired
-    @Qualifier("radeon")
+    @Qualifier("geforce")
     private VideoCard videoCard;
 
     @Autowired
-    @Qualifier("amd")
+    @Qualifier("intel")
     private CPU cpu;
 }

@@ -2,10 +2,10 @@ package platform.codingnomads.co.corespring.lab;
 
 import lombok.*;
 
-@AllArgsConstructor
 @Getter
 @Setter
 @ToString
+@AllArgsConstructor
 public class User {
     private final String id;
     private final String firstname;

@@ -10,6 +10,11 @@ public class PropertySourceAnnotationDemo {
         final App app = ctx.getBean(App.class);
         System.out.println("Values from myapp.properties: " +
                 "App Name: " + app.getAppName() + ", App Version: " + app.getAppVersion());
+
+        final Fusion fusion = ctx.getBean(Fusion.class);
+        System.out.println("Values from fusion.properties: " +
+                "Fusion Url: " + fusion.getUrl() + ", Fusion Keycloak: " + fusion.getKeycloakUrl());
+
         ctx.close();
     }
 }

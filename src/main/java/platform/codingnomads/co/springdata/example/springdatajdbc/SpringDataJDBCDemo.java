@@ -27,6 +27,10 @@ public class SpringDataJDBCDemo implements CommandLineRunner {
             //create employee table using the JdbcTemplate method "execute"
             jdbcTemplate.execute("CREATE TABLE employees (id BIGINT AUTO_INCREMENT PRIMARY KEY," +
                     "first_name VARCHAR(255) NOT NULL,last_name  VARCHAR(255) NOT NULL);");
+
+            // create client table
+            jdbcTemplate.execute("CREATE TABLE clients (id BIGINT AUTO_INCREMENT PRIMARY KEY," +
+                    "name VARCHAR(255) NOT NULL);");
         } catch (Exception e) {
             //nothing
         }
@@ -36,10 +40,19 @@ public class SpringDataJDBCDemo implements CommandLineRunner {
                 .map(name -> name.split(" "))
                 .collect(Collectors.toList());
 
+        // create a list of client names
+        List<String> clientNames = List.of("Alpha", "Beta", "Omega");
+
         //for each first & last name pair insert an Employee into the database
         for (Object[] name : splitUpNames) {
             jdbcTemplate.execute(String.format("INSERT INTO employees(first_name, last_name) VALUES ('%s','%s')", name[0], name[1]));
         }
+
+        // insert clients
+        for (String name : clientNames) {
+            jdbcTemplate.execute(String.format("INSERT INTO clients(name) VALUES ('%s')", name));
+        }
+
 
         //query the database for Employees with first name Java
         jdbcTemplate.query(
@@ -49,9 +62,20 @@ public class SpringDataJDBCDemo implements CommandLineRunner {
                 //print each found employee to the console
                 .forEach(employee -> System.out.println(employee.toString()));
 
-        //truncate the table
+        //query for all clients
+        jdbcTemplate.query(
+                        "SELECT id, name FROM clients",
+                        (rs, rowNum) -> new Client(rs.getLong("id"), rs.getString("name"))
+                )
+                //print each found client to the console
+                .forEach(client -> System.out.println(client.toString()));
+
+
+        //truncate the tables
         jdbcTemplate.execute("TRUNCATE TABLE employees;");
-        //delete the table
+        jdbcTemplate.execute("TRUNCATE TABLE clients;");
+        //delete the tables
         jdbcTemplate.execute("DROP TABLE employees");
+        jdbcTemplate.execute("DROP TABLE clients");
     }
 }

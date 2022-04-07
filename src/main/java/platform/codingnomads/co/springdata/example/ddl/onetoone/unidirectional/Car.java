@@ -21,4 +21,9 @@ public class Car {
     @Column(name = "horsepower")
     private String horsepower;
 
+    @OneToOne(optional = false)
+    private Engine engine;
+
+    @OneToOne(mappedBy = "car")
+    private Driver driver;
 }

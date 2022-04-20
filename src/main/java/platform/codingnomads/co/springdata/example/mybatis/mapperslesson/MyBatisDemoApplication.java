@@ -36,7 +36,7 @@ public class MyBatisDemoApplication {
             songMapper.insertNewSong(song1);
             songMapper.insertNewSong(song2);
 
-            Song song3 = songMapper.getSongById(1L);
+            Song song3 = songMapper.getSongById(song1.getId());
             System.out.println(song3.toString());
 
             // my stuff
@@ -49,16 +49,43 @@ public class MyBatisDemoApplication {
         Song song3 = createSong("Le Onde", "Islands",
                         "Ludovicio Enaudi", 250);
         Song song4 = createSong("We don't talk about Bruni", "Encanto soundtrack",
-                "Rachel Weathers", 312);
+                "Disney", 312);
+        Song song5 = createSong("Let it go", "Frozen",
+                "Disney", 274);
 
+        // Create
         songMapper.insertNewSong(song3);
         songMapper.insertNewSong(song4);
+        songMapper.insertNewSong(song5);
 
+        // Read
         print(songMapper.getSongsByName("Le Onde"));
+        print(songMapper.getSongsByAlbumAndArtist("Ludovicio Enaudi", "Islands"));
+        print(songMapper.getSongsByArtist("Disney"));
+        print(songMapper.getSongsBySongLength(274));
+
+        // Update
+        song3.setAlbum_name("Essential Ennaudi");
+        songMapper.updateSong(song3);
+        print(songMapper.getSongById(song3.getId()));
+
+        // Delete
+        songMapper.deleteSongById(song3.getId());
+        songMapper.deleteSongsByAlbumAndArtist("Disney", "Encanto soundtrack");
+        songMapper.deleteSongsBySongLength(274);
+        songMapper.deleteSongs();
     }
 
     private void print(ArrayList<Song> songs) {
+        System.out.println();
+        System.out.println("******************");
         songs.forEach(System.out::println);
+    }
+
+    private void print(Song song) {
+        System.out.println();
+        System.out.println("******************");
+        System.out.println(song);
     }
 
     private Song createSong(String name, String albumName, String artistName, int songLength) {

@@ -1,6 +1,8 @@
 package platform.codingnomads.co.springdata.example.ddl.onetoone.unidirectional;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -23,7 +25,4 @@ public class Car {
 
     @OneToOne(optional = false)
     private Engine engine;
-
-    @OneToOne(mappedBy = "car")
-    private Driver driver;
 }
